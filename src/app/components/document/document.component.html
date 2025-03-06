@@ -1,0 +1,163 @@
+<div class="content">
+    <div class="card">
+        <div class="header">
+            <h2>Document List</h2>
+            <button class="upload-document-btn" (click)="openUploadModal()">+ Upload Document</button>
+        </div>
+
+        <table *ngIf="documents.length > 0" class="document-table">
+            <thead>
+                <tr> 
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Filepath</th>
+                    <th>Directory</th>
+                    <th>Owner</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let document of documents">
+                    <td>{{ document.id }}</td>
+                    <td>{{ document.title }}</td>
+                    <td>{{ document.filepath }}</td>
+                    <td>{{ document.directory }}</td>
+                    <td>{{ document.ownerid }}</td>
+                    <td>{{ document.status }}</td>
+                    <td>
+                        <button class="btn-delete" (click)="deleteDocument(document.id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p *ngIf="documents.length === 0">No documents found.</p>
+    </div>
+</div>
+
+<!-- Directory List Section -->
+<div class="content">
+    <div class="card">
+        <div class="header">
+            <h2>Ingest Documents</h2>
+        </div>
+
+        <table *ngIf="distinctDirectories.length > 0" class="directory-table">
+            <thead>
+                <tr>
+                    <th>Directory</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let directory of distinctDirectories">
+                    <td>{{ directory.name }}</td>
+                    <td>{{ directory.status }}</td>
+                    <td>
+                        <button class="btn-ingest" (click)="ingestDirectory(directory)">Ingest</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p *ngIf="distinctDirectories.length === 0">No directories found.</p>
+    </div>
+</div>
+
+
+
+<!-- Document Modal
+<div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+        <h3>Add New Document</h3>
+
+        <form (ngSubmit)="addDocument()">
+            <label for="title">Title:</label>
+            <input type="text" id="title" [(ngModel)]="newDocument.title" name="title" required>
+
+            <label for="content">Content:</label>
+            <textarea id="content" [(ngModel)]="newDocument.content" name="content" required></textarea>
+
+            <div class="modal-actions">
+                <button type="submit" class="btn btn-primary">Add Document</button>
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div> -->
+
+<!-- Upload Document Modal -->
+<div class="modal" *ngIf="isUploadModalOpen">
+    <div class="modal-content">
+        <h3>Upload Document</h3>
+
+        <form (ngSubmit)="uploadDocument()">
+            <label for="file">Upload File:</label>
+            <input type="file" id="file" (change)="handleFileInput($event)" accept=".pdf, .doc, .docx, .txt" required>
+
+            <label for="title">Title (Optional):</label>
+            <input type="text" id="title" [(ngModel)]="title" name="title">
+
+            <label for="directory">Directory (Optional):</label>
+            <input type="text" id="directory" [(ngModel)]="directory" name="directory">
+
+            <div class="modal-actions">
+                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="button" class="btn btn-secondary" (click)="closeUploadModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <div class="content">
+    <div class="card">
+        <div class="header">
+            <h2>Document List</h2>
+            <button class="add-document-btn" (click)="openModal()">+ Add Document</button>
+        </div>
+
+        <table *ngIf="documents.length > 0" class="document-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let document of documents">
+                    <td>{{ document.id }}</td>
+                    <td>{{ document.title }}</td>
+                    <td>{{ document.content }}</td>
+                    <td>
+                        <button class="btn-delete" (click)="deleteDocument(document.id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p *ngIf="documents.length === 0">No documents found.</p>
+    </div>
+</div>
+
+-- Document Modal -
+<div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+        <h3>Add New Document</h3>
+
+        <form (ngSubmit)="addDocument()">
+            <label for="title">Title:</label>
+            <input type="text" id="title" [(ngModel)]="newDocument.title" name="title" required>
+
+            <label for="content">Content:</label>
+            <textarea id="content" [(ngModel)]="newDocument.content" name="content" required></textarea>
+
+            <div class="modal-actions">
+                <button type="submit" class="btn btn-primary">Add Document</button>
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div> -->
